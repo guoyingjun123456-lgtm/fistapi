@@ -18,22 +18,21 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { cn } from '@/lib/utils'
 
-interface ConnectionLineProps {
-  direction?: 'left' | 'right'
-}
-
 /**
- * Connection line between gateway and icon columns
+ * Single source of truth for landing-page horizontal alignment.
+ * Every home section renders its inner content through this container so the
+ * left/right edges line up perfectly across Hero, Stats, Features, etc.
  */
-export function ConnectionLine({ direction = 'left' }: ConnectionLineProps) {
-  const gradientClass =
-    direction === 'left'
-      ? 'from-primary/60 to-primary/20'
-      : 'from-primary/20 to-primary/60'
-
+export function SectionContainer({
+  className,
+  children,
+}: {
+  className?: string
+  children: React.ReactNode
+}) {
   return (
-    <div className='hidden lg:block'>
-      <div className={cn('h-[2px] w-24 bg-gradient-to-r', gradientClass)} />
+    <div className={cn('mx-auto w-full max-w-6xl px-6', className)}>
+      {children}
     </div>
   )
 }

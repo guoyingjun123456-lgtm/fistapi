@@ -18,6 +18,7 @@ For commercial licensing, please contact support@quantumnous.com
 */
 import { useState, useEffect, useRef, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
+import { getLobeIcon } from '@/lib/lobe-icon'
 
 type AccentTone = 'emerald' | 'amber' | 'blue' | 'violet'
 
@@ -44,28 +45,28 @@ const ACCENT_CLASSES: Record<
   }
 > = {
   emerald: {
-    activeText: 'text-emerald-600 dark:text-emerald-400',
-    activeBorder: 'border-emerald-500 dark:border-emerald-400',
+    activeText: 'text-success',
+    activeBorder: 'border-success',
     badge:
-      'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-400/10 dark:text-emerald-400',
+      'bg-success/10 text-success dark:bg-success/10 dark:text-success',
   },
   amber: {
-    activeText: 'text-amber-600 dark:text-amber-400',
-    activeBorder: 'border-amber-500 dark:border-amber-400',
+    activeText: 'text-primary',
+    activeBorder: 'border-primary',
     badge:
-      'bg-amber-500/10 text-amber-600 dark:bg-amber-400/10 dark:text-amber-400',
+      'bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary',
   },
   blue: {
-    activeText: 'text-blue-600 dark:text-blue-400',
-    activeBorder: 'border-blue-500 dark:border-blue-400',
+    activeText: 'text-primary',
+    activeBorder: 'border-primary',
     badge:
-      'bg-blue-500/10 text-blue-600 dark:bg-blue-400/10 dark:text-blue-400',
+      'bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary',
   },
   violet: {
-    activeText: 'text-violet-600 dark:text-violet-400',
-    activeBorder: 'border-violet-500 dark:border-violet-400',
+    activeText: 'text-primary',
+    activeBorder: 'border-primary',
     badge:
-      'bg-violet-500/10 text-violet-600 dark:bg-violet-400/10 dark:text-violet-400',
+      'bg-primary/10 text-primary dark:bg-primary/10 dark:text-primary',
   },
 }
 
@@ -163,6 +164,33 @@ const API_DEMOS: ApiDemoConfig[] = [
 const CYCLE_INTERVAL = 4500
 const TRANSITION_MS = 220
 
+// Domestic (Chinese) model vendor logos — all verified to exist in @lobehub/icons.
+const BRAND_LOGOS = [
+  'Qwen',
+  'DeepSeek',
+  'Kimi',
+  'Moonshot',
+  'Zhipu',
+  'ChatGLM',
+  'Doubao',
+  'Yi',
+  'Baichuan',
+  'Hunyuan',
+  'Stepfun',
+  'Wenxin',
+  'Spark',
+  'Minimax',
+]
+
+// Pre-render icons once with a deterministic per-item float duration/delay so
+// the grid drifts like Gemini's living logo cloud (no scrolling).
+const BRAND_LOGO_ITEMS = BRAND_LOGOS.map((name, i) => ({
+  name,
+  icon: getLobeIcon(`${name}.Color`, 28),
+  dur: `${6 + (i % 5)}s`,
+  delay: `${(i % 7) * 0.45}s`,
+}))
+
 interface HeroTerminalDemoProps {
   className?: string
 }
@@ -206,109 +234,32 @@ export function HeroTerminalDemo(props: HeroTerminalDemoProps) {
   const accent = ACCENT_CLASSES[demo.accent]
 
   return (
-    <div className={cn('mx-auto w-full max-w-2xl', props.className)}>
-      <div
-        className={cn(
-          'overflow-hidden rounded-2xl border backdrop-blur-sm',
-          'border-border/60 bg-white/95 shadow-[0_20px_50px_-25px_rgba(15,23,42,0.18)]',
-          'dark:border-white/[0.06] dark:bg-[#0b0f17]/95 dark:shadow-[0_20px_60px_-25px_rgba(0,0,0,0.7)]'
-        )}
-      >
-        {/* Tab strip */}
+    <div className={cn('mx-auto w-full max-w-4xl', props.className)}>
+      {/* Infinite scrolling logo marquee with fade masks */}
+      <div className='relative overflow-hidden'>
+        {/* Left/right fade masks */}
         <div
-          className={cn(
-            'flex items-center gap-1 border-b px-2 sm:gap-1.5 sm:px-3',
-            'border-border/50 dark:border-white/[0.05]'
-          )}
-        >
-          {API_DEMOS.map((item, index) => {
-            const tone = ACCENT_CLASSES[item.accent]
-            const isActive = index === activeIndex
-            return (
-              <button
-                key={item.id}
-                onClick={() => handleSelect(index)}
-                className={cn(
-                  'relative -mb-px flex items-center gap-1.5 border-b-2 px-2.5 py-2.5 text-[11px] font-medium tracking-wide transition-colors sm:px-3 sm:text-xs',
-                  isActive
-                    ? `${tone.activeBorder} ${tone.activeText}`
-                    : 'text-foreground/40 hover:text-foreground/70 border-transparent'
-                )}
-              >
-                {item.label}
-              </button>
-            )
-          })}
-          <div className='ml-auto flex items-center gap-2 pr-2 sm:pr-3'>
-            <span className='inline-block size-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.45)]' />
-            <span className='text-foreground/40 font-mono text-[10px] tracking-wider uppercase'>
-              200 ok
-            </span>
-          </div>
-        </div>
-
-        {/* Endpoint row */}
+          aria-hidden
+          className='from-background pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r to-transparent'
+        />
         <div
-          className={cn(
-            'flex items-center gap-2.5 border-b px-5 py-3',
-            'border-border/40 dark:border-white/[0.04]'
-          )}
-        >
-          <span
-            className={cn(
-              'rounded-md px-1.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider',
-              accent.badge
-            )}
-          >
-            {demo.method}
-          </span>
-          <code
-            className={cn(
-              'text-foreground/75 truncate font-mono text-[12.5px] transition-opacity duration-200',
-              transitioning ? 'opacity-0' : 'opacity-100'
-            )}
-          >
-            {demo.endpoint}
-          </code>
-        </div>
-
-        {/* Body — fixed rows so neither block shifts when switching demos */}
-        <div className='grid h-[400px] grid-rows-[235px_minmax(0,1fr)] font-mono text-[12.5px] leading-[1.55]'>
-          {/* Request */}
-          <RequestBlock demo={demo} transitioning={transitioning} />
-
-          {/* Response */}
-          <ResponseBlock demo={demo} transitioning={transitioning} />
-        </div>
-
-        {/* Footer metrics */}
-        <div
-          className={cn(
-            'flex items-center justify-between border-t px-5 py-2.5',
-            'border-border/40 bg-muted/30 dark:border-white/[0.05] dark:bg-white/[0.02]'
-          )}
-        >
-          <div className='text-foreground/40 flex items-center gap-3 text-[10px] tabular-nums'>
-            <span className='flex items-center gap-1'>
-              <span className='font-mono'>{demo.latency}</span>
-              <span className='tracking-wider uppercase'>ms</span>
-            </span>
-            <span className='bg-foreground/15 size-1 rounded-full' />
-            <span className='flex items-center gap-1'>
-              <span className='font-mono'>{demo.tokens}</span>
-              <span className='tracking-wider uppercase'>tokens</span>
-            </span>
-            <span className='bg-foreground/15 size-1 rounded-full' />
-            <span className='flex items-center gap-1'>
-              <span className='tracking-wider uppercase'>cost</span>
-              <span className='font-mono'>
-                ${(demo.tokens * 0.00003).toFixed(5)}
+          aria-hidden
+          className='from-background pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l to-transparent'
+        />
+        <div className='animate-marquee flex w-max items-center gap-12 py-4'>
+          {/* Duplicate set for seamless loop */}
+          {[...BRAND_LOGO_ITEMS, ...BRAND_LOGO_ITEMS].map((item, i) => (
+            <div
+              key={`${item.name}-${i}`}
+              className='text-muted-foreground/60 hover:text-foreground flex shrink-0 items-center gap-2.5 transition-colors duration-300'
+              title={item.name}
+            >
+              {item.icon}
+              <span className='text-sm font-medium whitespace-nowrap'>
+                {item.name}
               </span>
-            </span>
-          </div>
-          <span className='text-foreground/30 font-mono text-[10px] tracking-wider uppercase'>
-            stream · sse
-          </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>
@@ -503,7 +454,7 @@ function CodeLine(props: { children: ReactNode; indent?: number }) {
 
 function Command(props: { children: ReactNode }) {
   return (
-    <span className='font-medium text-emerald-600 dark:text-emerald-400'>
+    <span className='font-medium text-success'>
       {props.children}
     </span>
   )
@@ -511,25 +462,25 @@ function Command(props: { children: ReactNode }) {
 
 function Flag(props: { children: ReactNode }) {
   return (
-    <span className='text-blue-600 dark:text-blue-400'>{props.children}</span>
+    <span className='text-primary'>{props.children}</span>
   )
 }
 
 function Key(props: { children: ReactNode }) {
   return (
-    <span className='text-sky-700 dark:text-sky-300'>{props.children}</span>
+    <span className='text-primary'>{props.children}</span>
   )
 }
 
 function StringText(props: { children: ReactNode }) {
   return (
-    <span className='text-amber-700 dark:text-amber-300'>{props.children}</span>
+    <span className='text-primary'>{props.children}</span>
   )
 }
 
 function NumberText(props: { children: ReactNode }) {
   return (
-    <span className='font-medium text-violet-600 dark:text-violet-300'>
+    <span className='font-medium text-primary'>
       {props.children}
     </span>
   )

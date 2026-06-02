@@ -53,6 +53,15 @@ export function PublicLayout(props: PublicLayoutProps) {
       ) : (
         props.children
       )}
+
+      {/* Fixed floating brand badge */}
+      <a
+        href='/'
+        className='bg-background/80 border-border/50 text-foreground fixed right-5 bottom-5 z-50 flex items-center gap-2 rounded-full border px-3 py-2 shadow-lg backdrop-blur-sm transition-all hover:scale-105'
+      >
+        <img src='/logo.png' alt='FirstAPI' className='h-6 w-6 rounded-full object-contain' />
+        <span className='text-sm font-medium'>FirstAPI</span>
+      </a>
     </div>
   )
 }

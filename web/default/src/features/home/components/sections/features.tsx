@@ -28,6 +28,7 @@ import {
 } from 'lucide-react'
 import { useTranslation } from 'react-i18next'
 import { AnimateInView } from '@/components/animate-in-view'
+import { SectionContainer } from '../section-container'
 
 interface FeaturesProps {
   className?: string
@@ -45,14 +46,14 @@ export function Features(_props: FeaturesProps) {
         'Optimized network architecture ensures millisecond response times'
       ),
       span: 'md:col-span-2',
-      icon: <Zap className='size-4 text-blue-400' />,
+      icon: <Zap className='size-6 text-primary' />,
       visual: (
-        <div className='mt-4 grid grid-cols-3 gap-2'>
-          {['OpenAI', 'Claude', 'Gemini', 'DeepSeek', 'Qwen', 'Llama'].map(
+        <div className='mt-4 grid grid-cols-3 gap-px bg-border/60 border border-border/60'>
+          {['通义千问', 'DeepSeek', 'Kimi', '智谱', '豆包', '文心一言'].map(
             (name) => (
               <div
                 key={name}
-                className='border-border/30 bg-muted/20 text-muted-foreground flex items-center justify-center rounded-lg border px-3 py-2 text-xs transition-colors duration-300 hover:border-blue-500/30 hover:bg-blue-500/5'
+                className='bg-card text-muted-foreground hover:text-primary flex items-center justify-center px-3 py-2 font-mono text-xs transition-colors duration-200'
               >
                 {name}
               </div>
@@ -69,17 +70,17 @@ export function Features(_props: FeaturesProps) {
         'Enterprise-grade security with comprehensive permission management'
       ),
       span: 'md:col-span-1',
-      icon: <Shield className='size-4 text-emerald-400' />,
+      icon: <Shield className='size-6 text-success' />,
       visual: (
         <div className='mt-4 flex items-center justify-center'>
           <div className='relative'>
-            <div className='flex size-16 items-center justify-center rounded-2xl border border-emerald-500/20 bg-emerald-500/5'>
+            <div className='flex size-16 items-center justify-center rounded-2xl border border-success/20 bg-success/5'>
               <Shield
-                className='size-7 text-emerald-500/70'
+                className='size-7 text-success/70'
                 strokeWidth={1.5}
               />
             </div>
-            <div className='absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-emerald-500'>
+            <div className='absolute -top-1 -right-1 flex size-4 items-center justify-center rounded-full bg-success'>
               <svg
                 className='size-2.5 text-white'
                 fill='none'
@@ -104,7 +105,7 @@ export function Features(_props: FeaturesProps) {
       title: t('Global Coverage'),
       desc: t('Multi-region deployment for stable global access'),
       span: 'md:col-span-1',
-      icon: <Globe className='size-4 text-violet-400' />,
+      icon: <Globe className='size-6 text-primary' />,
       visual: (
         <div className='mt-4 space-y-2'>
           {[t('Load Balancing'), t('Rate Limiting'), t('Cost Tracking')].map(
@@ -113,7 +114,7 @@ export function Features(_props: FeaturesProps) {
                 <div
                   className={`flex size-6 items-center justify-center rounded-full text-[10px] font-bold ${
                     i === 1
-                      ? 'border border-blue-500/30 bg-blue-500/20 text-blue-500'
+                      ? 'border border-primary/30 bg-primary/20 text-primary'
                       : 'border-border/40 bg-muted text-muted-foreground border'
                   }`}
                 >
@@ -133,23 +134,21 @@ export function Features(_props: FeaturesProps) {
       title: t('Developer Friendly'),
       desc: t('Compatible API routes for common AI application workflows'),
       span: 'md:col-span-2',
-      icon: <Code className='size-4 text-amber-400' />,
+      icon: <Code className='size-6 text-primary' />,
       visual: (
-        <div className='mt-4 flex items-center gap-3'>
-          <div className='flex -space-x-2'>
-            {['API', 'SDK', 'CLI', 'Docs'].map((n) => (
-              <div
-                key={n}
-                className='border-background from-muted to-muted/60 text-muted-foreground flex size-8 items-center justify-center rounded-full border-2 bg-gradient-to-br text-[9px] font-bold'
-              >
-                {n}
-              </div>
-            ))}
-          </div>
-          <div className='text-muted-foreground flex items-center gap-1.5 text-xs'>
-            <Code className='size-3.5 text-blue-500' />
+        <div className='mt-4 flex flex-wrap items-center gap-2'>
+          {['API', 'SDK', 'CLI', 'Docs'].map((n) => (
+            <span
+              key={n}
+              className='border-border/60 text-muted-foreground border px-2 py-1 font-mono text-[11px]'
+            >
+              {n}
+            </span>
+          ))}
+          <span className='text-muted-foreground/70 ml-1 flex items-center gap-1.5 font-mono text-[11px]'>
+            <Code className='size-3.5 text-primary' />
             {t('Multi-protocol Compatible')}
-          </div>
+          </span>
         </div>
       ),
     },
@@ -179,11 +178,12 @@ export function Features(_props: FeaturesProps) {
   ]
 
   return (
-    <section className='relative z-10 px-6 py-24 md:py-32'>
-      <div className='mx-auto max-w-6xl'>
-        <AnimateInView className='mb-16 max-w-lg'>
-          <p className='text-muted-foreground mb-3 text-xs font-medium tracking-widest uppercase'>
-            {t('Core Features')}
+    <section className='relative z-10 pt-8 pb-10 md:pt-10 md:pb-12'>
+      <SectionContainer>
+        <AnimateInView className='mb-12 max-w-lg'>
+          <p className='text-muted-foreground/70 mb-3 font-mono text-xs tracking-tight'>
+            <span className='text-primary'>~/</span>core-features{' '}
+            <span className='text-primary'>--list</span>
           </p>
           <h2 className='text-2xl leading-tight font-bold tracking-tight md:text-3xl'>
             {t('Built for developers,')}
@@ -192,22 +192,29 @@ export function Features(_props: FeaturesProps) {
           </h2>
         </AnimateInView>
 
-        {/* Bento grid */}
-        <div className='border-border/40 bg-border/40 grid gap-px overflow-hidden rounded-xl border md:grid-cols-3'>
+        {/* Terminal-style connected grid: shared hairlines, square corners, mono */}
+        <div className='border-border grid grid-cols-1 overflow-hidden rounded-md border md:grid-cols-3'>
           {features.map((f, i) => (
             <AnimateInView
               key={f.id}
-              delay={i * 100}
-              animation='scale-in'
-              className={`bg-background group hover:bg-muted/20 p-7 transition-colors duration-300 md:p-8 ${f.span}`}
+              delay={i * 80}
+              animation='fade-up'
+              className={`group border-border bg-card hover:bg-muted/30 relative border-b p-6 transition-colors duration-200 last:border-b-0 md:border-r md:border-b-0 md:p-7 [&:nth-child(3n)]:md:border-r-0 ${f.span}`}
             >
-              <div className='mb-3 flex items-center gap-3'>
-                <span className='border-border/40 bg-muted text-muted-foreground flex size-7 items-center justify-center rounded-md border text-[10px] font-semibold tabular-nums'>
-                  {f.num}
+              {/* hover accent bar on the left, like a selected editor line */}
+              <span className='bg-primary absolute top-0 bottom-0 left-0 w-0.5 origin-top scale-y-0 transition-transform duration-200 group-hover:scale-y-100' />
+
+              <div className='mb-4 flex items-center justify-between font-mono text-xs'>
+                <span className='text-primary'>[{f.num}]</span>
+                <span className='text-muted-foreground/40 group-hover:text-primary transition-colors'>
+                  {f.icon}
                 </span>
-                <h3 className='text-sm font-semibold'>{f.title}</h3>
               </div>
-              <p className='text-muted-foreground text-sm leading-relaxed'>
+              <h3 className='font-mono text-sm font-semibold tracking-tight'>
+                <span className='text-primary'>// </span>
+                {f.title}
+              </h3>
+              <p className='text-muted-foreground mt-2 text-sm leading-relaxed'>
                 {f.desc}
               </p>
               {f.visual}
@@ -216,25 +223,32 @@ export function Features(_props: FeaturesProps) {
         </div>
 
         {/* Additional features row */}
-        <div className='mt-12 grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-12'>
+        <div className='mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-4'>
           {additionalFeatures.map((f, i) => (
             <AnimateInView
               key={f.title}
               delay={i * 100}
               animation='fade-up'
-              className='flex flex-col items-center text-center'
+              className='group/feat border-border/60 bg-card hover:border-primary/30 relative flex flex-col items-start overflow-hidden rounded-2xl border p-6 transition-all duration-300 hover:shadow-md'
             >
-              <div className='text-muted-foreground border-border/50 bg-muted/30 group-hover:text-foreground mb-3 flex size-12 items-center justify-center rounded-xl border transition-colors'>
+              {/* subtle corner glow on hover */}
+              <div
+                aria-hidden
+                className='from-primary/8 pointer-events-none absolute -top-8 -right-8 size-24 rounded-full bg-gradient-to-br to-transparent opacity-0 blur-2xl transition-opacity duration-300 group-hover/feat:opacity-100'
+              />
+              <div className='text-primary mb-4 flex size-11 items-center justify-center rounded-xl bg-primary/10 transition-transform duration-300 group-hover/feat:scale-105'>
                 {f.icon}
               </div>
-              <h3 className='mb-1.5 text-sm font-semibold'>{f.title}</h3>
-              <p className='text-muted-foreground max-w-[200px] text-xs leading-relaxed'>
+              <h3 className='mb-1.5 text-sm font-semibold tracking-tight'>
+                {f.title}
+              </h3>
+              <p className='text-muted-foreground text-xs leading-relaxed'>
                 {f.desc}
               </p>
             </AnimateInView>
           ))}
         </div>
-      </div>
+      </SectionContainer>
     </section>
   )
 }

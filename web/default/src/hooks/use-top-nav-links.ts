@@ -71,12 +71,12 @@ export function useTopNavLinks(): TopNavLink[] {
     links.push({ title: t('Console'), href: '/dashboard' })
   }
 
-  // Pricing
-  const pricing = modules?.pricing
-  if (pricing && typeof pricing === 'object' && pricing.enabled) {
-    const requiresAuth = pricing.requireAuth && !isAuthed
-    links.push({ title: t('Model Square'), href: '/pricing', requiresAuth })
-  }
+  // Pricing — navigation entry removed by customization (kept page route intact).
+  // const pricing = modules?.pricing
+  // if (pricing && typeof pricing === 'object' && pricing.enabled) {
+  //   const requiresAuth = pricing.requireAuth && !isAuthed
+  //   links.push({ title: t('Model Square'), href: '/pricing', requiresAuth })
+  // }
 
   // Rankings
   const rankings = modules?.rankings
@@ -85,19 +85,17 @@ export function useTopNavLinks(): TopNavLink[] {
     links.push({ title: t('Rankings'), href: '/rankings', requiresAuth })
   }
 
-  // Docs (supports external links)
-  if (modules?.docs !== false) {
-    if (docsLink) {
-      links.push({ title: t('Docs'), href: docsLink, external: true })
-    } else {
-      links.push({ title: t('Docs'), href: '/docs' })
-    }
-  }
-
-  // About
-  if (modules?.about !== false) {
-    links.push({ title: t('About'), href: '/about' })
-  }
+  // Docs / About — navigation entries removed by customization.
+  // if (modules?.docs !== false) {
+  //   if (docsLink) {
+  //     links.push({ title: t('Docs'), href: docsLink, external: true })
+  //   } else {
+  //     links.push({ title: t('Docs'), href: '/docs' })
+  //   }
+  // }
+  // if (modules?.about !== false) {
+  //   links.push({ title: t('About'), href: '/about' })
+  // }
 
   return links
 }

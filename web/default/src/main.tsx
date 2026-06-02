@@ -113,10 +113,14 @@ declare module '@tanstack/react-router' {
 
 // Render the app
 const rootElement = document.getElementById('root')!
-// Set document.title and favicon from cached status, then refresh from network
+// Set document.title and favicon from cached status, then refresh from network.
+// Brand title is locked to a fixed value (customization), independent of the
+// backend system_name; the favicon falls back to the bundled brand mark.
 ;(function initSystemBranding() {
   try {
     if (typeof window === 'undefined' || typeof document === 'undefined') return
+    const BRAND_TITLE = 'FirstAPI'
+    const BRAND_FAVICON = '/xin2.png?v=4'
     const apply = (name: string) => {
       document.title = name
       const metaTitle = document.querySelector(
@@ -124,29 +128,17 @@ const rootElement = document.getElementById('root')!
       ) as HTMLMetaElement | null
       if (metaTitle) metaTitle.setAttribute('content', name)
     }
-    // Cache-first
-    try {
-      const saved = localStorage.getItem('status')
-      if (saved) {
-        const s = JSON.parse(saved)
-        if (s?.system_name) apply(s.system_name)
-        if (s?.logo) applyFaviconToDom(s.logo)
-      }
-    } catch {
-      /* empty */
-    }
-    // Background refresh
+    // Always pin the brand title and favicon.
+    apply(BRAND_TITLE)
+    applyFaviconToDom(BRAND_FAVICON)
+    // Keep the status cache fresh (used elsewhere) without touching title/favicon.
     getStatus()
       .then((s) => {
-        if (s?.system_name) {
-          apply(s.system_name as string)
-          try {
-            localStorage.setItem('status', JSON.stringify(s))
-          } catch {
-            /* empty */
-          }
+        try {
+          if (s) localStorage.setItem('status', JSON.stringify(s))
+        } catch {
+          /* empty */
         }
-        if (s?.logo) applyFaviconToDom(s.logo as string)
       })
       .catch(() => {
         /* empty */

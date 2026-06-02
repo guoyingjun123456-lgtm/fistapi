@@ -1,0 +1,14 @@
+# 自定义构建覆盖文件 —— docker compose 会自动合并到 docker-compose.yml
+#
+# 用法:
+#   docker compose up -d --build     # 用本地 Dockerfile 构建含你改造前端的镜像并部署
+#   docker compose build             # 只构建不启动
+#
+# 回到官方预编译镜像: 删除/改名本文件即可
+services:
+  new-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: new-api:custom
+    pull_policy: build

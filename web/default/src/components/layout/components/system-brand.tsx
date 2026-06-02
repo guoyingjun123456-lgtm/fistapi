@@ -50,7 +50,7 @@ export function SystemBrand(props: SystemBrandProps) {
   const { logo } = useSystemConfig()
 
   const variant = props.variant ?? 'sidebar'
-  const name = status?.system_name || props.defaultName || 'New API'
+  const name = status?.system_name || props.defaultName || 'Unified API'
   const version =
     status?.version || props.defaultVersion || t('Unknown version')
 
@@ -58,20 +58,17 @@ export function SystemBrand(props: SystemBrandProps) {
     return (
       <Link
         to='/'
-        aria-label={t('Go to home')}
+        aria-label={name}
         className={cn(
-          'text-foreground inline-flex h-7 items-center gap-1.5 rounded-md px-1.5 text-sm font-medium transition-colors outline-none select-none',
+          'text-foreground inline-flex h-11 items-center rounded-md px-1.5 transition-colors outline-none select-none',
           'hover:bg-accent focus-visible:ring-ring/40 focus-visible:ring-2'
         )}
       >
-        <div className='flex size-5 items-center justify-center overflow-hidden rounded-md'>
-          <img
-            src={logo}
-            alt={t('Logo')}
-            className='size-full rounded-md object-cover'
-          />
-        </div>
-        <span className='max-w-[12rem] truncate'>{name}</span>
+        <img
+          src={logo}
+          alt={name}
+          className='h-10 w-auto max-w-[16rem] object-contain'
+        />
       </Link>
     )
   }
@@ -84,17 +81,12 @@ export function SystemBrand(props: SystemBrandProps) {
           className='hover:text-sidebar-foreground active:text-sidebar-foreground cursor-default hover:bg-transparent active:bg-transparent'
           render={<div />}
         >
-          <div className='flex aspect-square size-8 items-center justify-center overflow-hidden rounded-lg'>
-            <img
-              src={logo}
-              alt={t('Logo')}
-              className='size-full rounded-lg object-cover'
-            />
-          </div>
-          <div className='grid flex-1 text-start text-sm leading-tight group-data-[collapsible=icon]:hidden'>
-            <span className='truncate font-semibold'>{name}</span>
-            <span className='truncate text-xs'>{version}</span>
-          </div>
+          <img
+            src={logo}
+            alt={name}
+            title={`${name} · ${version}`}
+            className='h-12 w-auto max-w-full object-contain group-data-[collapsible=icon]:h-9'
+          />
         </SidebarMenuButton>
       </SidebarMenuItem>
     </SidebarMenu>

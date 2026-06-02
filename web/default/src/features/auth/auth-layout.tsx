@@ -20,6 +20,8 @@ import { Link } from '@tanstack/react-router'
 import { useTranslation } from 'react-i18next'
 import { useSystemConfig } from '@/hooks/use-system-config'
 import { Skeleton } from '@/components/ui/skeleton'
+import { AuthBackground } from './components/auth-background'
+import { AuthLLMVisual } from './components/auth-llm-visual'
 
 type AuthLayoutProps = {
   children: React.ReactNode
@@ -30,31 +32,48 @@ export function AuthLayout({ children }: AuthLayoutProps) {
   const { systemName, logo, loading } = useSystemConfig()
 
   return (
-    <div className='relative grid h-svh max-w-none'>
-      <Link
-        to='/'
-        className='absolute top-4 left-4 z-10 flex items-center gap-2 transition-opacity hover:opacity-80 sm:top-8 sm:left-8'
-      >
-        <div className='relative h-8 w-8'>
-          {loading ? (
-            <Skeleton className='absolute inset-0 rounded-full' />
-          ) : (
-            <img
-              src={logo}
-              alt={t('Logo')}
-              className='h-8 w-8 rounded-full object-cover'
-            />
-          )}
+    <div className='bg-muted/30 relative min-h-svh overflow-hidden'>
+      <AuthBackground />
+
+      <div className='relative z-10 flex min-h-svh items-center justify-center gap-6 px-4 lg:gap-10'>
+        {/* Left: dynamic large-language-model visual (large screens only) */}
+        <div className='hidden w-full max-w-lg shrink lg:block'>
+          <AuthLLMVisual />
         </div>
-        {loading ? (
-          <Skeleton className='h-6 w-24' />
-        ) : (
-          <h1 className='text-xl font-medium'>{systemName}</h1>
-        )}
-      </Link>
-      <div className='container flex items-center pt-16 sm:pt-0'>
-        <div className='mx-auto flex w-full flex-col justify-center space-y-2 px-4 py-8 sm:w-[480px] sm:p-8'>
-          {children}
+
+        {/* Right: form */}
+        <div className='w-full max-w-md shrink-0'>
+          <div className='animate-appear w-full'>
+            {/* Logo & brand */}
+            <Link
+              to='/'
+              className='mb-8 flex items-center justify-center gap-2.5 transition-opacity hover:opacity-80'
+            >
+              <div className='relative h-7 w-7'>
+                {loading ? (
+                  <Skeleton className='absolute inset-0 rounded' />
+                ) : (
+                  <img
+                    src={logo}
+                    alt={t('Logo')}
+                    className='h-7 w-7 object-contain'
+                  />
+                )}
+              </div>
+              {loading ? (
+                <Skeleton className='h-6 w-24' />
+              ) : (
+                <span className='text-foreground text-xl font-semibold'>
+                  {systemName}
+                </span>
+              )}
+            </Link>
+
+            {/* Card */}
+            <div className='bg-background/80 border-border/50 supports-[backdrop-filter]:bg-background/65 rounded-2xl border p-8 shadow-xl backdrop-blur-xl sm:p-10'>
+              {children}
+            </div>
+          </div>
         </div>
       </div>
     </div>

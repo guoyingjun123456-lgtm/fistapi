@@ -187,7 +187,7 @@ export function UptimeTrendChart(props: {
       yField: 'uptime',
       smooth: true,
       line: {
-        style: { stroke: '#10b981', lineWidth: 2 },
+        style: { stroke: '#34C759', lineWidth: 2 },
       },
       point: {
         visible: true,
@@ -196,9 +196,9 @@ export function UptimeTrendChart(props: {
           stroke: '#ffffff',
           lineWidth: 1.5,
           fill: (datum: { uptime: number }) => {
-            if (datum.uptime >= 99.9) return '#10b981'
-            if (datum.uptime >= 99.0) return '#f59e0b'
-            return '#ef4444'
+            if (datum.uptime >= 99.9) return '#34C759'
+            if (datum.uptime >= 99.0) return '#FF9500'
+            return '#FF3B30'
           },
         },
       },
@@ -309,7 +309,7 @@ export function ThroughputBarChart(props: {
       yField: 'group',
       bar: {
         style: {
-          fill: '#6366f1',
+          fill: '#5E5CE6',
           ...(barRadius == null ? {} : { cornerRadius: barRadius }),
         },
       },

@@ -296,7 +296,7 @@ export function processChartData(
   )
   const otherColor = modelColorRange[modelColorDomain.indexOf(otherLabel)]
   const otherTooltipColor =
-    typeof otherColor === 'string' ? otherColor : '#FF8A00'
+    typeof otherColor === 'string' ? otherColor : '#FF9500'
   const modelColor = {
     type: 'ordinal',
     domain: modelColorDomain,
@@ -719,17 +719,21 @@ export function processChartData(
   }
 }
 
+// Apple system color palette (hex) — used as the multi-series fallback when
+// the theme's --chart-* tokens are exhausted. Order: blue, green, orange,
+// purple, teal, pink, indigo, yellow, red, grey. Comfortable mid-lightness so
+// no series dominates; matches the app's Apple-style semantic palette.
 const USER_COLOR_FALLBACKS = [
-  '#5B8FF9',
-  '#5AD8A6',
-  '#F6BD16',
-  '#E8684A',
-  '#6DC8EC',
-  '#9270CA',
-  '#FF9D4D',
-  '#269A99',
-  '#FF99C3',
-  '#5D7092',
+  '#0A84FF',
+  '#34C759',
+  '#FF9500',
+  '#AF52DE',
+  '#5AC8FA',
+  '#FF2D55',
+  '#5E5CE6',
+  '#FFD60A',
+  '#FF3B30',
+  '#8E8E93',
 ]
 
 export function processUserChartData(

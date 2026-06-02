@@ -78,6 +78,30 @@ For commercial licensing, please contact support@quantumnous.com
   }
 }
 
+/* ── Tech-card → Apple-style soft card ─────────────────────────────────
+ * Applied to every <Card>. Quiet hairline border + soft layered shadow,
+ * a gentle lift and deepened shadow on hover. No neon glow or sweep —
+ * the premium feel comes from restraint, depth and whitespace. */
+.tech-card {
+  position: relative;
+  border: 1px solid var(--border);
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.03),
+    0 2px 6px -2px oklch(0 0 0 / 0.05),
+    0 8px 24px -8px oklch(0 0 0 / 0.06);
+  transition:
+    box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.35s ease;
+}
+
+.tech-card:hover {
+  border-color: color-mix(in oklch, var(--foreground) 10%, var(--border));
+  box-shadow:
+    0 1px 2px oklch(0 0 0 / 0.04),
+    0 4px 12px -4px oklch(0 0 0 / 0.07),
+    0 16px 40px -12px oklch(0 0 0 / 0.12);
+}
+
 /* Vercel Geist-style skeleton shimmer */
 .skeleton-shimmer {
   background: linear-gradient(
@@ -368,6 +392,62 @@ For commercial licensing, please contact support@quantumnous.com
     }
   }
 
+  /* Horizontal marquee for the brand logo strip */
+  @keyframes marquee-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-marquee {
+    animation: marquee-left 28s linear infinite;
+    will-change: transform;
+  }
+
+  .animate-marquee-reverse {
+    animation: marquee-left 28s linear infinite reverse;
+    will-change: transform;
+  }
+
+  .marquee-container:hover .animate-marquee,
+  .marquee-container:hover .animate-marquee-reverse {
+    animation-play-state: paused;
+  }
+
+  /* Gemini-style gentle floating: each logo bobs, drifts and rotates slightly
+   * on its own offset so the grid feels alive without scrolling. Per-item
+   * delay/duration are set inline via CSS custom properties. */
+  @keyframes logo-float {
+    0%,
+    100% {
+      transform: translateY(0) rotate(0deg) scale(1);
+    }
+    25% {
+      transform: translateY(-8px) rotate(-4deg) scale(1.04);
+    }
+    50% {
+      transform: translateY(2px) rotate(3deg) scale(0.98);
+    }
+    75% {
+      transform: translateY(-5px) rotate(2deg) scale(1.02);
+    }
+  }
+
+  .animate-logo-float {
+    animation: logo-float var(--float-dur, 7s) ease-in-out infinite;
+    animation-delay: var(--float-delay, 0s);
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-logo-float {
+      animation: none;
+    }
+  }
+
   .animate-scroll-up {
     animation: scroll-up 20s linear infinite;
     will-change: transform;
@@ -602,6 +682,121 @@ For commercial licensing, please contact support@quantumnous.com
   .terminal-demo-blink,
   .terminal-demo-spin,
   .terminal-demo-pulse {
+    animation: none !important;
+  }
+}
+
+/* ── Auth page ambient background ──────────────────────────────────────
+ * Drifting aurora orbs + a slowly-panning grid behind the sign-in/sign-up
+ * card. Colors derive from the theme's `--primary` so it stays on-brand in
+ * both light and dark. Restraint over spectacle: low opacity, heavy blur. */
+@keyframes auth-aurora-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(8%, -6%) scale(1.18);
+  }
+  66% {
+    transform: translate(-6%, 5%) scale(0.92);
+  }
+}
+@keyframes auth-aurora-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  33% {
+    transform: translate(-9%, 7%) scale(1.1);
+  }
+  66% {
+    transform: translate(7%, -5%) scale(1.06);
+  }
+}
+@keyframes auth-aurora-c {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(5%, 9%) scale(1.22);
+  }
+}
+@keyframes auth-grid-pan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 56px 56px;
+  }
+}
+
+.auth-aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(72px);
+  opacity: 0.28;
+  will-change: transform;
+}
+.dark .auth-aurora {
+  opacity: 0.2;
+}
+
+.auth-grid {
+  background-image:
+    linear-gradient(to right, var(--border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  animation: auth-grid-pan 9s linear infinite;
+  will-change: background-position;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .auth-aurora,
+  .auth-grid {
+    animation: none !important;
+  }
+}
+
+/* ── Auth split-panel neural-network visual ────────────────────────────
+ * A transformer/MLP-style graph whose edges carry flowing "signal" and
+ * whose nodes pulse, evoking a live large-language-model. Theme-driven
+ * via `--primary`; disabled under reduced-motion. */
+@keyframes auth-net-flow {
+  to {
+    stroke-dashoffset: -28;
+  }
+}
+@keyframes auth-node-pulse {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.6);
+  }
+}
+.auth-net-edge {
+  stroke: var(--primary);
+  stroke-width: 1;
+  stroke-dasharray: 4 9;
+  stroke-opacity: 0.18;
+  animation: auth-net-flow 2.4s linear infinite;
+  will-change: stroke-dashoffset;
+}
+.auth-node-glow {
+  fill: var(--primary);
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: auth-node-pulse 3.2s ease-in-out infinite;
+  will-change: transform, opacity;
+}
+@media (prefers-reduced-motion: reduce) {
+  .auth-net-edge,
+  .auth-node-glow {
     animation: none !important;
   }
 }
