@@ -115,7 +115,7 @@ export function PerformanceHealthPanel() {
       </div>
 
       <div className='space-y-3 p-4 sm:p-5'>
-        <div className='grid grid-cols-3 gap-2'>
+        <div className='grid grid-cols-3 gap-3'>
           <MetricCell
             icon={HeartPulse}
             label={t('Success rate')}
@@ -195,17 +195,17 @@ function MetricCell(props: {
 }) {
   const Icon = props.icon
   return (
-    <div className='bg-muted/40 rounded-xl px-3 py-2.5'>
-      <div className='text-muted-foreground flex items-center gap-1.5 text-[11px] font-medium'>
-        <Icon className='size-3 shrink-0' aria-hidden='true' />
+    <div className='bg-muted/40 flex flex-col justify-between gap-3 rounded-xl px-4 py-5 sm:py-6'>
+      <div className='text-muted-foreground flex items-center gap-1.5 text-xs font-medium'>
+        <Icon className='size-3.5 shrink-0' aria-hidden='true' />
         <span className='truncate'>{props.label}</span>
       </div>
       {props.loading ? (
-        <Skeleton className='mt-1.5 h-5 w-16' />
+        <Skeleton className='h-9 w-24' />
       ) : (
         <div
           className={cn(
-            'mt-1.5 font-mono text-sm font-semibold tabular-nums',
+            'font-mono text-2xl leading-none font-semibold tabular-nums sm:text-3xl',
             props.valueClassName
           )}
         >

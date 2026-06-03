@@ -25,6 +25,7 @@ import { AnimatedOutlet } from '@/components/page-transition'
 import { SkipToMain } from '@/components/skip-to-main'
 import { AppHeader } from './app-header'
 import { AppSidebar } from './app-sidebar'
+import { DashboardFooter } from './dashboard-footer'
 
 type AuthenticatedLayoutProps = {
   children?: React.ReactNode
@@ -46,10 +47,14 @@ export function AuthenticatedLayout(props: AuthenticatedLayoutProps) {
                 '@container/content',
                 'h-[calc(100svh-var(--app-header-height,0px))]',
                 'min-h-0 overflow-hidden',
+                'bg-[radial-gradient(ellipse_90%_55%_at_50%_-5%,color-mix(in_oklch,var(--primary)_9%,var(--background))_0%,color-mix(in_oklch,var(--primary)_3%,var(--background))_35%,var(--background)_70%)]',
                 'peer-data-[variant=inset]:h-[calc(100svh-var(--app-header-height,0px)-(var(--spacing)*4))]'
               )}
             >
-              {props.children ?? <AnimatedOutlet />}
+              <div className='flex min-h-0 flex-1 flex-col overflow-hidden'>
+                {props.children ?? <AnimatedOutlet />}
+              </div>
+              <DashboardFooter />
             </SidebarInset>
           </div>
         </SidebarProvider>

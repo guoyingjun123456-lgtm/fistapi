@@ -109,14 +109,14 @@ For commercial licensing, please contact support@quantumnous.com
   --card-foreground: oklch(0.21 0.006 265);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.21 0.006 265);
-  --primary: oklch(0.58 0.21 256);
+  --primary: oklch(0.58 0.14 162);
   --primary-foreground: oklch(0.99 0 0);
   --secondary: oklch(0.95 0.003 265);
   --secondary-foreground: oklch(0.25 0.006 265);
   --muted: oklch(0.955 0.003 265);
   --muted-foreground: oklch(0.55 0.008 265);
-  --accent: oklch(0.95 0.012 256);
-  --accent-foreground: oklch(0.45 0.18 256);
+  --accent: oklch(0.95 0.02 162);
+  --accent-foreground: oklch(0.48 0.12 162);
   --destructive: oklch(0.595 0.205 27);
   --destructive-foreground: oklch(0.99 0 0);
   --success: oklch(0.68 0.16 150);
@@ -129,7 +129,7 @@ For commercial licensing, please contact support@quantumnous.com
   --neutral-foreground: oklch(0.21 0.006 265);
   --border: oklch(0.89 0.004 265);
   --input: oklch(0.89 0.004 265);
-  --ring: oklch(0.58 0.21 256);
+  --ring: oklch(0.58 0.14 162);
   /* Apple system colors for charts: blue, green, orange, purple, pink, teal.
    * Distinct hues, all at a comfortable mid lightness so no slice screams. */
   --chart-1: oklch(0.58 0.21 256);
@@ -139,12 +139,12 @@ For commercial licensing, please contact support@quantumnous.com
   --chart-5: oklch(0.62 0.21 350);
   --sidebar: oklch(0.945 0.003 265);
   --sidebar-foreground: oklch(0.21 0.006 265);
-  --sidebar-primary: oklch(0.58 0.21 256);
+  --sidebar-primary: oklch(0.58 0.14 162);
   --sidebar-primary-foreground: oklch(0.99 0 0);
-  --sidebar-accent: oklch(0.92 0.012 256);
-  --sidebar-accent-foreground: oklch(0.45 0.18 256);
+  --sidebar-accent: oklch(0.92 0.02 162);
+  --sidebar-accent-foreground: oklch(0.48 0.12 162);
   --sidebar-border: oklch(0.89 0.004 265);
-  --sidebar-ring: oklch(0.58 0.21 256);
+  --sidebar-ring: oklch(0.58 0.14 162);
   --skeleton-base: oklch(0.93 0.003 265);
   --skeleton-highlight: oklch(0.97 0.002 265);
 }
@@ -158,17 +158,17 @@ For commercial licensing, please contact support@quantumnous.com
   --card-foreground: oklch(0.97 0.01 265);
   --popover: oklch(0.19 0.038 265);
   --popover-foreground: oklch(0.97 0.01 265);
-  --primary: oklch(0.72 0.21 270);
+  --primary: oklch(0.72 0.15 162);
   --primary-foreground: oklch(0.99 0.01 270);
   --secondary: oklch(0.25 0.045 265);
   --secondary-foreground: oklch(0.96 0.01 265);
   --muted: oklch(0.22 0.04 265);
   --muted-foreground: oklch(0.74 0.03 265);
-  --accent: oklch(0.34 0.09 275);
+  --accent: oklch(0.34 0.07 162);
   --accent-foreground: oklch(0.98 0.01 270);
   --destructive: oklch(0.66 0.23 18);
   --destructive-foreground: oklch(0.99 0.01 18);
-  --success: oklch(0.72 0.17 162);
+  --success: oklch(0.72 0.17 150);
   --success-foreground: oklch(0.14 0.02 265);
   --warning: oklch(0.8 0.16 80);
   --warning-foreground: oklch(0.14 0.02 265);
@@ -176,9 +176,9 @@ For commercial licensing, please contact support@quantumnous.com
   --info-foreground: oklch(0.14 0.02 265);
   --neutral: oklch(0.62 0.03 265);
   --neutral-foreground: oklch(0.97 0.01 265);
-  --border: oklch(0.55 0.1 270 / 24%);
-  --input: oklch(0.55 0.1 270 / 20%);
-  --ring: oklch(0.72 0.21 270);
+  --border: oklch(0.55 0.08 162 / 24%);
+  --input: oklch(0.55 0.08 162 / 20%);
+  --ring: oklch(0.72 0.15 162);
   --chart-1: oklch(0.72 0.21 270);
   --chart-2: oklch(0.7 0.17 195);
   --chart-3: oklch(0.72 0.2 330);
@@ -186,12 +186,12 @@ For commercial licensing, please contact support@quantumnous.com
   --chart-5: oklch(0.68 0.2 25);
   --sidebar: oklch(0.115 0.026 265);
   --sidebar-foreground: oklch(0.95 0.01 265);
-  --sidebar-primary: oklch(0.72 0.21 270);
+  --sidebar-primary: oklch(0.72 0.15 162);
   --sidebar-primary-foreground: oklch(0.99 0.01 270);
-  --sidebar-accent: oklch(0.32 0.08 275);
+  --sidebar-accent: oklch(0.32 0.07 162);
   --sidebar-accent-foreground: oklch(0.98 0.01 270);
-  --sidebar-border: oklch(0.55 0.1 270 / 20%);
-  --sidebar-ring: oklch(0.72 0.21 270);
+  --sidebar-border: oklch(0.55 0.08 162 / 20%);
+  --sidebar-ring: oklch(0.72 0.15 162);
   --skeleton-base: oklch(0.22 0.04 265);
   --skeleton-highlight: oklch(0.28 0.05 265);
 }

@@ -67,8 +67,11 @@ export function SystemBrand(props: SystemBrandProps) {
         <img
           src={logo}
           alt={name}
-          className='h-10 w-auto max-w-[16rem] object-contain'
+          className='h-5 w-auto max-w-[9rem] object-contain'
         />
+        <span className='text-foreground ml-2 text-[15px] font-semibold tracking-tight whitespace-nowrap'>
+          FirstAPI
+        </span>
       </Link>
     )
   }
