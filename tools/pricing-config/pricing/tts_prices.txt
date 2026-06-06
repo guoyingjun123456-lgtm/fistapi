@@ -1,0 +1,10 @@
+qwen3-tts-flash	0.1
+qwen3-tts-flash-2025-09-18	0.1
+qwen3-tts-flash-realtime	0.13
+qwen3-tts-flash-realtime-2025-09-18	0.13
+qwen3-tts-vd-realtime-2026-01-15	0.13
+qwen3-tts-vd-2026-01-26	0.115
+qwen3-tts-vc-realtime-2026-01-15	0.13
+qwen3-tts-vc-2026-01-22	0.115
+qwen3-tts-instruct-flash-2026-01-26	0.115
+qwen3-tts-instruct-flash	0.115
